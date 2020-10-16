@@ -5,24 +5,23 @@ using namespace cv;
 
 int main()
 {
-	cv::Mat srcMat = imread("D:\\2.jpg", 0);
+	cv::Mat srcMat = imread("D:\\3.jpg", 0);
 	cv::Mat dst;
 	threshold(srcMat, dst, 100, 255, THRESH_BINARY_INV);
-	cv::Mat d = getStructuringElement(MORPH_ELLIPSE, Size(20, 20));
-	cv::Mat d2 = getStructuringElement(MORPH_ELLIPSE, Size(5, 5));
+	cv::Mat d = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
 
 	morphologyEx(dst, dst, MORPH_OPEN, d);
-	morphologyEx(dst, dst, MORPH_CLOSE, d2);
+	
 	Mat labels;
 	Mat stats;
 	Mat centroids;
 
-	int  yd = connectedComponentsWithStats(dst, labels,
+	int  hxz = connectedComponentsWithStats(dst, labels,
 		stats, centroids,
-		8, CV_32S);
+		8, CV_16U);
 
-	std::cout << "圆点的个数 = " << yd - 1 << std::endl;
-	for (int i = 0; i < yd; i++)
+	std::cout << "回形针的个数= " << hxz-1 << std::endl;
+	for (int i = 0; i <hxz; i++)
 	{
 		cv::Rect rect;
 		rect.x = stats.at<int>(i, 0);
@@ -34,8 +33,7 @@ int main()
 
 
 
-	imshow("final", dst);
-	imshow("final2", srcMat);
+	imshow("final", srcMat);
 	waitKey(0);
 	return 0;
 
