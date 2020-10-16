@@ -39,7 +39,7 @@ int main()
 
 
 
-	//imshow("final", srcMat);
+	imshow("final", srcMat);
 	waitKey(0);
 	return 0;
 
