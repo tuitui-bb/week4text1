@@ -20,7 +20,7 @@ int main()
 		stats, centroids,
 		8, CV_16U);
 
-	std::cout << "回形针的个数= " << hxz-1 << std::endl;
+	std::cout << "回形针的个数= " << hxz-2 << std::endl;
 	for (int i = 0; i <hxz; i++)
 	{
 		cv::Rect rect;

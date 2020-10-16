@@ -21,7 +21,7 @@ int main()
 		stats, centroids,
 		8, CV_32S);
 
-	std::cout << "圆点的个数 = " << yd - 1 << std::endl;
+	std::cout << "圆点的个数 = " << yd - 2 << std::endl;
 	for (int i = 0; i < yd; i++)
 	{
 		cv::Rect rect;
