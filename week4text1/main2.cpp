@@ -6,10 +6,11 @@ using namespace cv;
 int main()
 {
 	cv::Mat srcMat = imread("D:\\2.jpg", 0);
-	cv::Mat dst;
-	threshold(srcMat, dst, 100, 255, THRESH_BINARY_INV);
-	cv::Mat d = getStructuringElement(MORPH_ELLIPSE, Size(20, 20));
-	cv::Mat d2 = getStructuringElement(MORPH_ELLIPSE, Size(5, 5));
+	cv::Mat dst = 255 - srcMat;
+
+	threshold(dst, dst, 100, 255, THRESH_OTSU);
+	cv::Mat d = getStructuringElement(0, Size(20, 20));
+	cv::Mat d2 = getStructuringElement(0, Size(5, 5));
 
 	morphologyEx(dst, dst, MORPH_OPEN, d);
 	morphologyEx(dst, dst, MORPH_CLOSE, d2);
@@ -21,7 +22,7 @@ int main()
 		stats, centroids,
 		8, CV_32S);
 
-	std::cout << "圆点的个数 = " << yd - 2 << std::endl;
+	std::cout << "圆点的个数 = " << yd - 1 << std::endl;
 	for (int i = 0; i < yd; i++)
 	{
 		cv::Rect rect;
